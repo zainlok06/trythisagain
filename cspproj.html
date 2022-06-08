@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<div style="height: 50px;"></div>
+<html>
+<head>
+    <title>"Our CSP Quiz"</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+	<h1 style="text-align:center">CSP Quiz!</h1>
+    <p1 style="text-align:center" id="id01">This is a game to test your understanding of CSP concepts.</br></p1>
+    <p1>All credit for the questions goes to collegeboard.</p1>
+</body>
+    <div style = "background-color:rgba(123, 82, 105, 0.54)">
+        <h2 id="question">Question Text</h2>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="a" class="answer">
+                <label for="a" id="a_text">Answer</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="b" id="b_text" >Answer</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="c" id="c_text">Answer</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="d" class="answer">
+                <label for="d" id="d_text">Answer</label>
+            </li>
+        </ul>
+        <button id="submit" >Submit</button>
+    </div>
+
+
+  </div>
+
+<script>
+const quizData = [
+    {
+        question: "A company that develops mobile applications wants to involve users in the software development process. Which of the following best explains the benefit in having users participate?",
+        a: "Users can identify and correct errors they encounter when using released versions of the software",
+        b: "Users can review the algorithms used in the software to help improve their efficiency.",
+        c: "Users can provide documentation for program code at the end of the software development process.",
+        d: "Users can provide feedback that can be used to incorporate a variety of perspectives into the software.",
+        correct: "d",
+    },
+    {
+        question: "Which of the following is most likely to be a benefit of storing the information from each calling session in a database?",
+        a: "The company can analyze the calling session data and thereby make better business decisions.",
+        b: "The company can ensure that customer information is protected from misuse.",
+        c: "The company can reduce the costs associated with data storage.",
+        d: "The company can reduce its need for data compression.",
+        correct: "a",
+    },
+    {
+        question: "Each student that enrolls at a school is assigned a unique ID number, which is stored as a binary number. The ID numbers increase sequentially by 1 with each newly enrolled student. If the ID number assigned to the last student who enrolled was the binary number 1001 0011, what binary number will be assigned to the next student who enrolls?",
+        a: "1001 0100",
+        b: "1001 0111",
+        c: "1101 0100",
+        d: "1101 0111",
+        correct: "c",
+    },
+    {
+        question: "Which of the following best describes the ability of parallel computing solutions to improve efficiency?",
+        a: "Any problem that can be solved sequentially can be solved using a parallel solution in approximately half the time.",
+        b: "Any solutions can be broken down into smaller and smaller parallel portions, making the improvement in efficiency theoretically limitless as long as there are enough processors available.",
+        c: "The efficiency of parallel computing solutions has rarely improved the efficiency of sequential computing solutions.",
+        d: "The efficiency of a solution that can be broken down into parallel portions is still limited by a sequential portion.",
+        correct: "d",
+
+    },
+    {
+        question:"Which of the following school policies is most likely to have a positive impact on the digital divide?",
+        a:"A school allows students to bring a graphing calculator from home to complete in-class mathematics assignments.",
+        b:"A school allows students to bring a tablet computer to class every day to participate in graded quizzes.",
+        c:"A school provides a laptop or tablet computer to all students enrolled at the school.",
+        d:"A school recommends that all students purchase a computer with as much processing speed as possible so that projects run faster.",
+        correct: "c",
+    }, 
+    {
+        question:"Which of the following best explains how data is typically assembled in packets for transmission over the internet?",
+        a:"Each packet contains data to be transmitted, along with metadata containing information used for routing the data.",
+        b:"Each packet contains an excrpted version of the data to be transmitted along with metalata containong the key needed to decrypt the data.",
+        c:"Each packet contains only the metadata used to establish a direct connection so that the data can be transmitted.",
+        d:"Each packet contains multiple data files bundled together, along with metadata describing how to categorize each data file.",
+        correct: "a"
+    },
+    {
+        question:"Consider the 4-bit binary number 0011, 0110, and 1111. Which of the following decimal values is NOT equal to one of these binary numbers?",
+        a:"3",
+        b:"6",
+        c:"9",
+        d:"15",
+        correct: "c"
+    },
+    {
+        question:"Which of the following actions is most likely to raise legal or ethical concerns?",
+        a:"An analyst writes a program that scans through a database of open-access scientific journals and creates a document with links to articles written on a particular topic.",
+        b:"A musician creates a song using samples of a copyrighted work and then uses a creative commons license to publish the song",
+        c:"A computer scientist adds several features to an open-source software program that was designed by another individual",
+        d:"A public interest group alerts people to a scam that involves charging them for a program that is available for free under a creative common license",
+        correct: "b"
+    },
+    {
+        question:"A user unintentionally installs keylogging software on a computer. Which of the following is an example of how the keylogging software can be used by an unauthorized individual to gain access to computing resources",
+        a:"The software records all users inputs on the computer. the recorded information is transmitted to an unauthorized individual, who analyzes it to determine the user's login password.",
+        b:"The software gives an unauthorized individual remote access to the computer, allowing the individual to search the computer for personal information.",
+        c:"The software installs a virus on the computer and prompts the user to make a payment to the unauthorized individual to remove the virus.",
+        d:"The software prompts the user to enter personal information to verify the user's identity. This personal information is recorded and transmitted to an unauthorized individual.",
+        correct: "a"
+    },
+    {
+        question:"A programmer is creating an algorithm that will be used to turn on the motor to open the gate in a parking garage. The specifications for the algoritm are as follows. (The gate should not open when the time is outside of business hours.) (The motor should not turn on unless the gate sensor is activated.) ( The motor should not turn on if the gate is already open.) Which of the following algoritms can be used to open the gate under the appropiate conditions?",
+        a:"Check if the time is outside of business hours. if it is, check if the gate sensor is activated. if it is, check if the gate is closed. if it is, turn on the motor.",
+        b:"Check if the time is during business hours. if it is, check if the gate sensor is activated. if it is, check if the gate is open. If it is, turn on the motor",
+        c:"Check if the time is during business hours. if it is, check if the gate sensor is activated. if it is not, check if the gate is open. if it is not, turn on the motor",
+        d:"Check if the time is during business hours. if it is, check if the gate sensor is activated. if it is, check if the gate is open. if it is not, turn on the motor",
+        correct: "d"
+    }
+];
+
+const quiz= document.getElementById('quiz')
+const answerEls = document.querySelectorAll('.answer')
+const questionEl = document.getElementById('question')
+const a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+const submitBtn = document.getElementById('submit')
+const display_text =document.getElementById('id01')
+
+
+let currentQuiz = 0
+let score = 0
+
+loadQuiz()
+
+function loadQuiz() {
+
+    deselectAnswers()
+
+    const currentQuizData = quizData[currentQuiz]
+
+    questionEl.innerText = currentQuizData.question
+    a_text.innerText = currentQuizData.a
+    b_text.innerText = currentQuizData.b
+    c_text.innerText = currentQuizData.c
+    d_text.innerText = currentQuizData.d
+}
+
+function deselectAnswers() {
+    answerEls.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected() {
+    let answer
+    answerEls.forEach(answerEl => {
+        if(answerEl.checked) {
+            answer = answerEl.id
+        }
+    })
+    return answer
+}
+
+
+submitBtn.addEventListener('click', () => {
+    const answer = getSelected()
+    if(answer) {
+       if(answer === quizData[currentQuiz].correct) {
+           score++
+       }
+
+       currentQuiz++
+
+       if(currentQuiz < quizData.length) {
+           loadQuiz()
+       } else {
+           document.getElementById("id01").innerHTML = "You got " + score + " out of 10";
+       }
+    }
+})
+</script>
+<style>
+    body{
+        background-color: #ee5522;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3CradialGradient id='a' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='%23FB3'/%3E%3Cstop offset='1' stop-color='%23ee5522'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='750' x2='1550' y2='750'%3E%3Cstop offset='0' stop-color='%23f7882b'/%3E%3Cstop offset='1' stop-color='%23ee5522'/%3E%3C/linearGradient%3E%3Cpath id='s' fill='url(%23b)' d='M1549.2 51.6c-5.4 99.1-20.2 197.6-44.2 293.6c-24.1 96-57.4 189.4-99.3 278.6c-41.9 89.2-92.4 174.1-150.3 253.3c-58 79.2-123.4 152.6-195.1 219c-71.7 66.4-149.6 125.8-232.2 177.2c-82.7 51.4-170.1 94.7-260.7 129.1c-90.6 34.4-184.4 60-279.5 76.3C192.6 1495 96.1 1502 0 1500c96.1-2.1 191.8-13.3 285.4-33.6c93.6-20.2 185-49.5 272.5-87.2c87.6-37.7 171.3-83.8 249.6-137.3c78.4-53.5 151.5-114.5 217.9-181.7c66.5-67.2 126.4-140.7 178.6-218.9c52.3-78.3 96.9-161.4 133-247.9c36.1-86.5 63.8-176.2 82.6-267.6c18.8-91.4 28.6-184.4 29.6-277.4c0.3-27.6 23.2-48.7 50.8-48.4s49.5 21.8 49.2 49.5c0 0.7 0 1.3-0.1 2L1549.2 51.6z'/%3E%3Cg id='g'%3E%3Cuse href='%23s' transform='scale(0.12) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.2) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.25) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(0.3) rotate(-20)'/%3E%3Cuse href='%23s' transform='scale(0.4) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(0.5) rotate(20)'/%3E%3Cuse href='%23s' transform='scale(0.6) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.7) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.835) rotate(-40)'/%3E%3Cuse href='%23s' transform='scale(0.9) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(1.05) rotate(25)'/%3E%3Cuse href='%23s' transform='scale(1.2) rotate(8)'/%3E%3Cuse href='%23s' transform='scale(1.333) rotate(-60)'/%3E%3Cuse href='%23s' transform='scale(1.45) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(1.6) rotate(10)'/%3E%3C/g%3E%3C/defs%3E%3Cg transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Ccircle fill='url(%23a)' r='3000'/%3E%3Cg opacity='0.5'%3E%3Ccircle fill='url(%23a)' r='2000'/%3E%3Ccircle fill='url(%23a)' r='1800'/%3E%3Ccircle fill='url(%23a)' r='1700'/%3E%3Ccircle fill='url(%23a)' r='1651'/%3E%3Ccircle fill='url(%23a)' r='1450'/%3E%3Ccircle fill='url(%23a)' r='1250'/%3E%3Ccircle fill='url(%23a)' r='1175'/%3E%3Ccircle fill='url(%23a)' r='900'/%3E%3Ccircle fill='url(%23a)' r='750'/%3E%3Ccircle fill='url(%23a)' r='500'/%3E%3Ccircle fill='url(%23a)' r='380'/%3E%3Ccircle fill='url(%23a)' r='250'/%3E%3C/g%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23g' transform='rotate(10)'/%3E%3Cuse href='%23g' transform='rotate(120)'/%3E%3Cuse href='%23g' transform='rotate(240)'/%3E%3C/g%3E%3Ccircle fill-opacity='0.1' fill='url(%23a)' r='3000'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+        
+    }
+    h1{
+        color: rgba(86, 233, 171, 0.84);
+        font-family:Verdana;
+        
+    }
+    p1{
+        color: rgba(26, 248, 219, 0.87);
+        font-family:Verdana;
+        padding: 1rem;
+        text-align: center;
+        margin: 0;
+    }
+    h2{
+      padding: 1rem;
+      font-size: 16px;
+      text-align: center;
+      margin: 0;
+    }
+    
+    .button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+</style>
+</html>
